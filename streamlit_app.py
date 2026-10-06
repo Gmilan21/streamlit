@@ -58,4 +58,20 @@ selected_subcategories = st.multiselect(
 
 st.write("You selected:", selected_subcategories)
 
+# Filter data for selected sub-categories
+if selected_subcategories:
+    filtered_df = df[
+        (df["Category"] == selected_category) &
+        (df["Sub_Category"].isin(selected_subcategories))
+    ]
 
+    # Group sales by month
+    selected_sales_by_month = (
+        filtered_df[["Sales"]]
+        .groupby(pd.Grouper(freq="ME"))
+        .sum()
+    )
+
+    # Line chart
+    st.write("### Monthly Sales for Selected Sub-Categories")
+    st.line_chart(selected_sales_by_month, y="Sales")
