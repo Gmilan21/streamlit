@@ -75,3 +75,29 @@ if selected_subcategories:
     # Line chart
     st.write("### Monthly Sales for Selected Sub-Categories")
     st.line_chart(selected_sales_by_month, y="Sales")
+
+    # Calculate metrics
+    total_sales = filtered_df["Sales"].sum()
+    total_profit = filtered_df["Profit"].sum()
+
+    profit_margin = (total_profit / total_sales) * 100
+
+    # Display metrics
+    st.write("### Performance Metrics")
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric(
+        "Total Sales",
+        f"${total_sales:,.2f}"
+    )
+
+    col2.metric(
+        "Total Profit",
+        f"${total_profit:,.2f}"
+    )
+
+    col3.metric(
+        "Profit Margin",
+        f"{profit_margin:.2f}%"
+    )
