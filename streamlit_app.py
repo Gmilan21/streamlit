@@ -45,3 +45,17 @@ selected_category = st.selectbox(
 )
 
 st.write("You selected:", selected_category)
+
+# Sub-Category multi-select based on selected Category
+sub_categories = df[
+    df["Category"] == selected_category
+]["Sub_Category"].unique()
+
+selected_subcategories = st.multiselect(
+    "Select Sub-Categories",
+    sub_categories
+)
+
+st.write("You selected:", selected_subcategories)
+
+
