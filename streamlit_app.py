@@ -82,6 +82,14 @@ if selected_subcategories:
 
     profit_margin = (total_profit / total_sales) * 100
 
+    # Calculate overall profit margin for all products
+overall_sales = df["Sales"].sum()
+overall_profit = df["Profit"].sum()
+overall_profit_margin = (overall_profit / overall_sales) * 100
+
+# Difference between selected and overall profit margin
+margin_difference = profit_margin - overall_profit_margin
+
     # Display metrics
     st.write("### Performance Metrics")
 
@@ -98,6 +106,7 @@ if selected_subcategories:
     )
 
     col3.metric(
-        "Profit Margin",
-        f"{profit_margin:.2f}%"
-    )
+    "Profit Margin",
+    f"{profit_margin:.2f}%",
+    delta=f"{margin_difference:.2f}%"
+)
